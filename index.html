@@ -1,141 +1,216 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>AR Viewer</title>
+<head>
+    <title>AR Product Viewer</title>
     <meta charset="utf-8">
-    <meta name="description" content="AR Viewer for E-commerce">
+    <meta name="description" content="Explore products in Augmented Reality">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia|Roboto:400,700&display=swap">
     <style>
-      body {
-        margin: 0;
-        font-family: 'Sofia', sans-serif;
-        background-color: #f8f8f8;
-      }
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
 
-      #container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-      }
+        /* Header Styles */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-      h1 {
-        font-size: 4vw; /* Responsive font size */
-        text-align: center;
-      }
-
-      p {
-        text-align: center;
-        font-size: 2.5vw; /* Responsive font size */
-        max-width: 600px;
-        margin: 10px auto;
-      }
-
-      #product-image {
-        max-width: 80%;
-        height: auto;
-        margin: 20px 0;
-        border-radius: 8px;
-      }
-
-      model-viewer {
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        margin: 20px 0;
-      }
-
-      #ar-button {
-        padding: 12px 20px;
-        font-size: 2vw; /* Responsive button */
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 20px;
-      }
-
-      #ar-button:hover {
-        background-color: #0056b3;
-      }
-
-      #instructions {
-        text-align: center;
-      }
-
-      #instructions h4 {
-        font-size: 3vw;
-        margin-bottom: 10px;
-      }
-
-      #instructions p {
-        font-size: 2vw;
-        margin: 0;
-      }
-
-      /* Media Queries */
-      @media (min-width: 768px) {
         h1 {
-          font-size: 2.5rem;
+            font-size: 3rem;
+            margin: 0;
         }
 
-        p {
-          font-size: 1rem;
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: white;
         }
 
-        #ar-button {
-          font-size: 1rem;
+        .hero h2 {
+            font-size: 2.5rem;
+            margin: 10px 0;
         }
 
-        #instructions h4 {
-          font-size: 1.5rem;
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
-        #instructions p {
-          font-size: 1rem;
+        .hero button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-      }
+
+        .hero button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .ar-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .ar-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            position: relative;
+        }
+
+        /* Media Queries for larger screens */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.5rem;
+            }
+
+            .product-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
-  </head>
+</head>
 
-  <body>
-    <div id="container">
-      <h1>AR Viewer</h1>
-      <p>The AR viewer can be integrated into existing e-commerce websites and can be used to view products in 3D in the customer's physical space.</p>
-      <img id="product-image" src="product.webp" alt="Product Image">
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Augmented Reality Product Viewer</h1>
+    </header>
 
-      <!-- 3D Model Viewer -->
-      <model-viewer id="3d-model" ar-modes="scene-viewer quick-look webxr" ar disable-tap disable-pan camera-controls touch-action="pan-y" auto-rotate xr-environment alt="A 3D model of a product">
-        <button id="ar-primary-button" slot="ar-button" style="display: none; background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px;">
-          Activate AR
-        </button>
-      </model-viewer>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Experience Products Like Never Before</h2>
+        <p>View and interact with your favorite products in your own space with our AR viewer.</p>
+        <button onclick="scrollToProducts()">Explore Products</button>
+    </section>
 
-      <!-- Button to load the 3D model -->
-      <button id="ar-button" onclick="load3DModel()">
-        View product in AR
-      </button>
+    <!-- Product Grid -->
+    <div class="product-grid" id="products">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img class="product-image" src="product1.webp" alt="Product 1 Image">
+            <h2 class="product-title">Product 1</h2>
+            <p class="product-description">A great product for your needs. Discover its features and view in AR.</p>
+            <button class="ar-button" onclick="load3DModel('hydrating-cleanser-8oz-reduced (1).glb')">View in AR</button>
+        </div>
 
-      <div id="instructions">
-        <h4>Instructions for AR</h4>  
-        <p>1. Use 2 fingers to pinch and zoom</p>
-        <p>2. Use 2 fingers to rotate</p>
-      </div>
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img class="product-image" src="product2.webp" alt="Product 2 Image">
+            <h2 class="product-title">Product 2</h2>
+            <p class="product-description">Experience the innovation behind this amazing product. Try it in AR!</p>
+            <button class="ar-button" onclick="load3DModel('uploads_files_3660386_glb.glb')">View in AR</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img class="product-image" src="product3.webp" alt="Product 3 Image">
+            <h2 class="product-title">Product 3</h2>
+            <p class="product-description">Enhance your life with this product. See it in your space with AR.</p>
+            <button class="ar-button" onclick="load3DModel('samsung_s23_ultra_free.glb')">View in AR</button>
+        </div>
+
+        <!-- Add more products as needed -->
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 AR Product Viewer. All rights reserved.</p>
+    </footer>
+
+    <model-viewer id="3d-model" ar-modes="scene-viewer quick-look webxr" ar disable-tap disable-pan camera-controls touch-action="pan-y" auto-rotate xr-environment style="display:none;"></model-viewer>
 
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
     <script>
-      // Function to load the GLB model on button click
-      function load3DModel() {
-        const modelViewer = document.getElementById('3d-model');
-        modelViewer.setAttribute('src', 'samsung_s23_ultra_free.glb');  // Update with actual GLB file path
-        document.getElementById('ar-primary-button').click();  // Simulate click for AR
-      }
+        // Function to scroll to the product section
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to load the 3D model based on the product selected
+        function load3DModel(modelFile) {
+            const modelViewer = document.getElementById('3d-model');
+            modelViewer.setAttribute('src', modelFile); // Dynamically load GLB model
+            modelViewer.style.display = 'block';
+            modelViewer.activateAR(); // Start AR session
+        }
     </script>
-  </body>
+</body>
 </html>
