@@ -3,12 +3,103 @@
   <head>
     <title>AR Viewer</title>
     <meta charset="utf-8">
-    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="description" content="AR Viewer for E-commerce">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
-    <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
     <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Sofia', sans-serif;
+        background-color: #f8f8f8;
+      }
+
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 4vw; /* Responsive font size */
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+        font-size: 2.5vw; /* Responsive font size */
+        max-width: 600px;
+        margin: 10px auto;
+      }
+
+      #product-image {
+        max-width: 80%;
+        height: auto;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      model-viewer {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin: 20px 0;
+      }
+
+      #ar-button {
+        padding: 12px 20px;
+        font-size: 2vw; /* Responsive button */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+
+      #ar-button:hover {
+        background-color: #0056b3;
+      }
+
+      #instructions {
+        text-align: center;
+      }
+
+      #instructions h4 {
+        font-size: 3vw;
+        margin-bottom: 10px;
+      }
+
+      #instructions p {
+        font-size: 2vw;
+        margin: 0;
+      }
+
+      /* Media Queries */
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        #ar-button {
+          font-size: 1rem;
+        }
+
+        #instructions h4 {
+          font-size: 1.5rem;
+        }
+
+        #instructions p {
+          font-size: 1rem;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -31,8 +122,8 @@
 
       <div id="instructions">
         <h4>Instructions for AR</h4>  
-        <p style="font-size: 12px;">1. Use 2 fingers to pinch and zoom</p>
-        <p style="font-size: 12px;">2. Use 2 fingers to rotate</p>
+        <p>1. Use 2 fingers to pinch and zoom</p>
+        <p>2. Use 2 fingers to rotate</p>
       </div>
     </div>
 
@@ -46,6 +137,5 @@
         document.getElementById('ar-primary-button').click();  // Simulate click for AR
       }
     </script>
-
   </body>
 </html>
